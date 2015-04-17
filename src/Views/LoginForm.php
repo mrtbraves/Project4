@@ -13,6 +13,7 @@ class LoginForm extends View
     <head>
         <meta charset="UTF-8">
     <title>CS4350 Project One Login</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 
 
         <style>
@@ -28,9 +29,6 @@ class LoginForm extends View
             font-size: medium;
             margin: 0;
             background: #E9E6FC;
-          }
-          h4{
-            color: #4E4790;
           }
           a {
             color: whitesmoke;
@@ -127,21 +125,41 @@ class LoginForm extends View
             margin-top: -940px
 
           }
+
           .radio{
             margin-left: -2px;
 
           }
 
+          .tab {
+            width:90px;
+            height:30px;
+            text-decoration: none;
+            cursor: pointer;
+            border:none;
+            font-size: medium;
+            padding: 5px 10px;
+          }
 
+          .tab-active {
+            background-color: #4E4790;
+            color: whitesmoke;
+          }
 
+          .tab-inactive {
+            background-color: #D9D0F6;
+            color: #4E4790;
+          }
         </style>
     </head>
     <body>
         <div id="parent" align="center">
             <form id="loginForm">
               <div class="container">
-
-                <h4>Please Login</h4>
+              <div style="margin: 10px">
+                  <a class="tab tab-inactive" onclick="showRegister()">Register</a>
+                  <a class="tab tab-active" onclick="showLogin()">Login</a>
+                </div>
                 <div id="error" class="hide" style="margin-bottom: 5px; color: firebrick">Wrong username or password</div>
                 <div class="formcontrol">
                   <label for="username">Username</label>
@@ -160,6 +178,30 @@ class LoginForm extends View
               <p>password: 12345678</p>
               </div>
             </form>
+
+            <form id="registrationForm">
+              <div class="container">
+                <div style="margin: 10px">
+                  <a class="tab tab-active" onclick="showRegister()">Register</a>
+                  <a class="tab tab-inactive" onclick="showLogin()">Login</a>
+                </div>
+                <div class="formcontrol">
+                  <label for="username">Username</label>
+                  <input type="text" id="regUsername" name="regUsername" autocomplete="off">
+                </div>
+                <div class="formcontrol">
+                  <label for="username">New Password</label>
+                  <input type="password" id="regPassword" name="regPassword">
+                </div>
+                <div class="formcontrol">
+                  <label for="username">Confirm Password</label>
+                  <input type="password" id="confPassword" name="confPassword">
+                </div>
+                <div style="text-align: right; margin-top:10px;">
+                  <input class="button" type="button" value="Get Started!" onclick="register()">
+                </div>
+              </div>
+            </form>
         </div>
     </body>
 </html>
@@ -167,7 +209,18 @@ class LoginForm extends View
 <script>
   $(document).ready(function() {
     $("#error").hide();
+    $("#loginForm").hide();
   });
+
+  function showRegister() {
+    $("#loginForm").hide();
+    $("#registrationForm").show();
+  }
+
+  function showLogin() {
+    $("#loginForm").show();
+    $("#registrationForm").hide();
+  }
 
 	function formSubmit() {
 		$.post('/login/', $("#loginForm").serialize()).done(function (data) {
@@ -180,6 +233,12 @@ class LoginForm extends View
           }
 		});
 	}
+
+  function register() {
+    $.post('/register/', $("#registrationForm").serialize()).done(function (data) {
+      alert(data);
+    });
+  }
 </script>
 
 

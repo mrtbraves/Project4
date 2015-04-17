@@ -37,6 +37,13 @@ $app->get('/login/', function () {
     $logincontroller->action();
 });
 
+$app->get('/register/', function () {
+    
+    $registercontroller = new \Controllers\AuthController();
+
+    $registercontroller->action();
+});
+
 $app->post('/login/', function () use ($app) {
     $username = $app->request()->params('username');
     $password = $app->request()->params('password');
@@ -44,6 +51,16 @@ $app->post('/login/', function () use ($app) {
     $logincontroller = new \Controllers\AuthController();
 
     $logincontroller->login($username, $password);
+});
+
+$app->post('/register/', function () use ($app) {
+    $regUsername = $app->request()->params('regUsername');
+    $regPassword = $app->request()->params('regPassword');
+    $confPassword = $app->request()->params('confPassword');
+
+    $registercontroller = new \Controllers\AuthController();
+
+    $registercontroller->register($regUsername, $regPassword, $confPassword);
 });
 
 $app->get('/welcome/', function () use ($app) {
