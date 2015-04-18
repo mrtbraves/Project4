@@ -57,10 +57,13 @@ $app->post('/register/', function () use ($app) {
     $regUsername = $app->request()->params('regUsername');
     $regPassword = $app->request()->params('regPassword');
     $confPassword = $app->request()->params('confPassword');
+    $regTwitter = $app->request()->params('regTwitter');
+    $firstName = $app->request()->params('fname');
+    $lastName = $app->request()->params('lname');
 
     $registercontroller = new \Controllers\AuthController();
 
-    $registercontroller->register($regUsername, $regPassword, $confPassword);
+    $registercontroller->register($regUsername, $regPassword, $regTwitter, $firstName, $lastName);
 });
 
 $app->get('/welcome/', function () use ($app) {
