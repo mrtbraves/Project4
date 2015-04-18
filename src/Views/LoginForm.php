@@ -80,6 +80,18 @@ class LoginForm extends View
             box-shadow: none;
             border-radius: none;
           }
+          input[type="email"] {
+            display: block;
+            margin: 0;
+            height:30px;
+            width: 100%;
+            color: inherit;
+            font-family: sans-serif;
+            font-size: 15px;
+            appearance: none;
+            box-shadow: none;
+            border-radius: none;
+          }
           input[type="text"]:focus {
             outline: none;
           }
@@ -207,6 +219,10 @@ class LoginForm extends View
                   <input type="text" id="lname" name="lname" autocomplete="off">
                 </div>
                 <div class="formcontrol">
+                  <label for="email">Email</label>
+                  <input type="email" id="regEmail" name="regEmail">
+                </div>
+                <div class="formcontrol">
                   <label for="twitter">Twitter Handle</label>
                   <input type="text" id="regTwitter" name="regTwitter">
                 </div>
@@ -273,6 +289,10 @@ class LoginForm extends View
     else if(document.getElementById("lname").value ==''){
       $("#error2").show();
       $("#error2").html("Please Enter Last Name");
+    }
+    else if(document.getElementById("regEmail").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Enter Email Address");
     }
     else{
       $.post('/register/', $("#registrationForm").serialize()).done(function (data) {

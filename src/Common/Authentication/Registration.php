@@ -32,6 +32,7 @@ class Registration
     protected $twitter;
     protected $firstName;
     protected $lastName;
+    protected $email;
 
     public function __construct()
     {
@@ -39,7 +40,7 @@ class Registration
         $this->users = $this->db->getUsers();
     }
 
-    public function addUser($username = '', $password = '', $twitter='', $firstName, $lastName)
+    public function addUser($username = '', $password = '', $twitter='', $email, $firstName, $lastName)
     {
 
         if ($username !== '') {
@@ -58,7 +59,9 @@ class Registration
         if ($lastName !== '') {
             $this->lastName = $lastName;
         }
-
+        if ($email !== '') {
+            $this->email = $email;
+        }
         //Check if user already exists
         foreach($this->users as $u){
             if($u['username']===$username){
@@ -68,7 +71,7 @@ class Registration
         }
         $regDate = time();
 
-        $sql = "INSERT INTO users (username, password, twitter, fname, lname, regdate) VALUES ('".$this->username."', '".$this->password."', '".$this->twitter."', '".$this->firstName."', '".$this->lastName."', '$regDate');";
+        $sql = "INSERT INTO users (username, password, twitter, fname, lname, regdate, email) VALUES ('".$this->username."', '".$this->password."', '".$this->twitter."', '".$this->firstName."', '".$this->lastName."', '$regDate', '".$this->email."');";
 
         $result = $this->db->insert($sql);
 

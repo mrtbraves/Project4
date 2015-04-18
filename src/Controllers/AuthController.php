@@ -48,12 +48,12 @@ class AuthController extends Controller
        echo "false";
     }
 
-    public function register($username='', $password='', $twitter='', $firstName, $lastName) {
+    public function register($username='', $password='', $twitter='', $email, $firstName, $lastName) {
 
 
         $register = new Registration();
 
-        $result = $register->addUser($username, $password, $twitter, $firstName, $lastName);
+        $result = $register->addUser($username, $password, $twitter, $email, $firstName, $lastName);
 
         if($result === true){
             $user = new User($username);
