@@ -32,11 +32,10 @@ class AuthController extends Controller
 
     public function login($username='', $password='') {
 
-
         $auth = new Authenticate();
         $result = $auth->authenticate($username, $password);
 
-       if ($result === true) {
+        if ($result === true) {
             // header( 'Location: /welcome' ) ;
             $view = new WelcomeView();
             $view->showPartial();
@@ -44,5 +43,9 @@ class AuthController extends Controller
         }
        
        echo "false";
+    }
+
+    public function register($username='', $password='', $confPassword='') {       
+       echo "Register class and logic here";
     }
 }
