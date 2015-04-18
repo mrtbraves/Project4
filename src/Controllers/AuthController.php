@@ -13,6 +13,7 @@
 namespace Controllers;
 use Common\Authentication\Authenticate;
 use Common\Authentication\Registration;
+use Common\Authentication\User;
 use Views\LoginForm;
 use Views\WelcomeView;
 
@@ -37,8 +38,9 @@ class AuthController extends Controller
         $result = $auth->authenticate($username, $password);
 
         if ($result === true) {
-
-            $view = new WelcomeView();
+            $user = new User($username);
+            //print_r($user->profile());
+            $view = new WelcomeView($user->profile());
             $view->showPartial();
             die;
         }
@@ -54,7 +56,8 @@ class AuthController extends Controller
         $result = $register->addUser($username, $password, $twitter, $firstName, $lastName);
 
         if($result === true){
-            $view = new WelcomeView();
+            $user = new User($username);
+            $view = new WelcomeView($user->profile());
             $view->showPartial();
             die;
 

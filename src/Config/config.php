@@ -10,7 +10,7 @@ $httpDir = $projectDir . '/src/Common/Http';
 $routerDir = $projectDir . '/src/Common/Routers';
 $srcDir = $projectDir . '/src';
 $viewsDir = $projectDir . '/src/Views';
-
+ini_set('date.timezone', 'America/Boise');
 $config = [
     'app' => [
         'slim-config' =>[

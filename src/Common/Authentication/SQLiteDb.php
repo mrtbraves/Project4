@@ -56,10 +56,17 @@ class SQLiteDb
         return $this->users;
     }
 
+
     public function insert($sql){
 
         return $this->sqliteDb->exec($sql);
     }
 
+    public function query($sql){
+        $ret = $this->sqliteDb->query($sql);
+        $result = $ret->fetchArray(SQLITE3_ASSOC);
+
+        return $result;
+    }
 
 }
