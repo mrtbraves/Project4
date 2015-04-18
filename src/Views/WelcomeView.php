@@ -13,7 +13,7 @@ class WelcomeView extends View
       $userId = $data['userId'];
       $username = $data['username'];
       $fullname = $data['fname']." ".$data['lname'];
-
+      $email = $data['email'];
       $twitter = $data['twitter'];
       $regdate = date('m/d/Y', $data['regdate']);
 
@@ -112,6 +112,7 @@ class WelcomeView extends View
           <p>User ID: $userId</p>
           <p>Username: $username</p>
           <p>Full Name: $fullname</p>
+          <p>Email: $email</p>
           <p>Twitter Handle: $twitter</p>
           <p>Registration Date: $regdate</p>
 

@@ -27,6 +27,7 @@ class User
     protected $userId;
     protected $username;
     protected $twitter;
+    protected $email;
     protected $firstName;
     protected $lastName;
     protected $regDate;
@@ -44,6 +45,7 @@ class User
 
         $this->username= $this->userDetails['username'];
         $this->twitter= $this->userDetails['twitter'];
+        $this->email= $this->userDetails['email'];
         $this->firstName= $this->userDetails['fname'];
         $this->lastName= $this->userDetails['lname'];
         $this->regDate = $this->userDetails['regdate'];
