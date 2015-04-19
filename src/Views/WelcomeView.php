@@ -5,8 +5,18 @@ namespace Views;
 
 class WelcomeView extends View
 {
-    public function __construct()
+
+    public function __construct($data = array())
     {
+      //print_r($data);
+
+      $userId = $data['userId'];
+      $username = $data['username'];
+      $fullname = $data['fname']." ".$data['lname'];
+      $email = $data['email'];
+      $twitter = $data['twitter'];
+      $regdate = date('m/d/Y', $data['regdate']);
+
         $this->content = <<<WELCOME
 <!DOCTYPE html>
 <html>
@@ -60,6 +70,16 @@ class WelcomeView extends View
             background: #D9D0F6;
             padding: 3px 10px 10px 10px;
           }
+          .profile{
+            margin-top:10px;
+            border-radius: 5px;
+            text-align: left;
+            margin: 0 auto;
+
+            background: #D9D0F6;
+            padding: 3px 10px 10px 10px;
+
+          }
 
           .formcontrol{
             padding: 5px;
@@ -85,12 +105,22 @@ class WelcomeView extends View
         </style>
     </head>
     <body>
-    <div id="title">
+      <div id="title">
         <h2>Welcome to our site</h2>
       </div>
+      <div class="profile">
+          <p>User ID: $userId</p>
+          <p>Username: $username</p>
+          <p>Full Name: $fullname</p>
+          <p>Email: $email</p>
+          <p>Twitter Handle: $twitter</p>
+          <p>Registration Date: $regdate</p>
 
+      </div>
+      <div id="twitterfeed"></div>
       <div class="footer"></div>
-      <div class="form">
+
+
     </body>
 </html>
 

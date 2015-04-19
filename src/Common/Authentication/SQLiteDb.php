@@ -38,13 +38,15 @@ class SQLiteDb
 
         while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
             $this->users[] = array(
+                'userId' => $row['userId'],
                 'username' => $row['username'],
                 'password' => $row['password'],
+                'twitter' => $row['twitter'],
 
             );
         }
 
-        $this->sqliteDb->close();
+        //$this->sqliteDb->close();
 
         //print_r($this->users);
 
@@ -53,4 +55,18 @@ class SQLiteDb
     public function getUsers() {
         return $this->users;
     }
+
+
+    public function insert($sql){
+
+        return $this->sqliteDb->exec($sql);
+    }
+
+    public function query($sql){
+        $ret = $this->sqliteDb->query($sql);
+        $result = $ret->fetchArray(SQLITE3_ASSOC);
+
+        return $result;
+    }
+
 }

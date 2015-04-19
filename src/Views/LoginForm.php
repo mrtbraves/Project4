@@ -80,6 +80,18 @@ class LoginForm extends View
             box-shadow: none;
             border-radius: none;
           }
+          input[type="email"] {
+            display: block;
+            margin: 0;
+            height:30px;
+            width: 100%;
+            color: inherit;
+            font-family: sans-serif;
+            font-size: 15px;
+            appearance: none;
+            box-shadow: none;
+            border-radius: none;
+          }
           input[type="text"]:focus {
             outline: none;
           }
@@ -156,11 +168,11 @@ class LoginForm extends View
         <div id="parent" align="center">
             <form id="loginForm">
               <div class="container">
-              <div style="margin: 10px">
+                <div style="margin: 10px">
                   <a class="tab tab-inactive" onclick="showRegister()">Register</a>
                   <a class="tab tab-active" onclick="showLogin()">Login</a>
                 </div>
-                <div id="error" class="hide" style="margin-bottom: 5px; color: firebrick">Wrong username or password</div>
+                <div id="error" class="hide" style="margin-bottom: 5px; color: firebrick"></div>
                 <div class="formcontrol">
                   <label for="username">Username</label>
                   <input type="text" id="username" name="username" autocomplete="off">
@@ -185,6 +197,7 @@ class LoginForm extends View
                   <a class="tab tab-active" onclick="showRegister()">Register</a>
                   <a class="tab tab-inactive" onclick="showLogin()">Login</a>
                 </div>
+                <div id="error2" class="hide" style="margin-bottom: 5px; color: firebrick"></div>
                 <div class="formcontrol">
                   <label for="username">Username</label>
                   <input type="text" id="regUsername" name="regUsername" autocomplete="off">
@@ -196,6 +209,22 @@ class LoginForm extends View
                 <div class="formcontrol">
                   <label for="username">Confirm Password</label>
                   <input type="password" id="confPassword" name="confPassword">
+                </div>
+                <div class="formcontrol">
+                  <label for="fname">First Name</label>
+                  <input type="text" id="fname" name="fname" autocomplete="off">
+                </div>
+                <div class="formcontrol">
+                  <label for="lname">Last Name</label>
+                  <input type="text" id="lname" name="lname" autocomplete="off">
+                </div>
+                <div class="formcontrol">
+                  <label for="email">Email</label>
+                  <input type="email" id="regEmail" name="regEmail">
+                </div>
+                <div class="formcontrol">
+                  <label for="twitter">Twitter Handle</label>
+                  <input type="text" id="regTwitter" name="regTwitter">
                 </div>
                 <div style="text-align: right; margin-top:10px;">
                   <input class="button" type="button" value="Get Started!" onclick="register()">
@@ -226,6 +255,7 @@ class LoginForm extends View
 		$.post('/login/', $("#loginForm").serialize()).done(function (data) {
           if (data === 'false') {
             $("#error").show();
+            $("#error").html("Wrong username or password");
             document.getElementById("password").value = '';
             document.getElementById("password").focus();
           } else {
@@ -235,9 +265,46 @@ class LoginForm extends View
 	}
 
   function register() {
-    $.post('/register/', $("#registrationForm").serialize()).done(function (data) {
-      alert(data);
-    });
+
+    if(document.getElementById("regUsername").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Enter a Username");
+    }
+    else if(document.getElementById("regPassword").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Enter Password");
+    }
+    else if(document.getElementById("confPassword").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Re-Enter Password");
+    }
+    else if(document.getElementById("regPassword").value !== document.getElementById("confPassword").value){
+      $("#error2").show();
+      $("#error2").html("Passwords don't match");
+    }
+    else if(document.getElementById("fname").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Enter First Name");
+    }
+    else if(document.getElementById("lname").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Enter Last Name");
+    }
+    else if(document.getElementById("regEmail").value ==''){
+      $("#error2").show();
+      $("#error2").html("Please Enter Email Address");
+    }
+    else{
+      $.post('/register/', $("#registrationForm").serialize()).done(function (data) {
+        //alert(data);
+        if(data === "false"){
+            $("#error2").show();
+            $("#error2").html("User already exists");
+        }else {
+            $("#parent").html(data);
+        }
+      });
+    }
   }
 </script>
 
